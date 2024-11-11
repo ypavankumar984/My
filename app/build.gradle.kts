@@ -57,6 +57,8 @@ dependencies {
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth")
 
+    implementation("com.google.firebase:firebase-firestore")
+
     // Firebase Firestore (optional, depending on your needs)
     // implementation("com.google.firebase:firebase-firestore")
 }
