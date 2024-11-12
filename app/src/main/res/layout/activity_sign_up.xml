@@ -9,8 +9,7 @@
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:hint="Email" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -24,4 +23,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Up" />
+
 </LinearLayout>
