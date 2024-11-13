@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- res/layout/activity_home.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <!-- TextView to display user email -->
-    <TextView
-        android:id="@+id/userEmailTextView"
-        android:layout_width="wrap_content"
+    <!-- Search View at the top -->
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome, User!"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:queryHint="Search items…" />
 
-    <!-- Add other UI elements like buttons, etc., here -->
-
-</LinearLayout>
+    <!-- RecyclerView for displaying items in a grid -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewItems"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchView"
+        android:padding="8dp" />
+</RelativeLayout>
