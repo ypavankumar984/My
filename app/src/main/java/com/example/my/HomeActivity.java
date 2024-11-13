@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         // Add items with discounts to the list (dummy data for illustration)
         items.add(new Item("Apple airpods", "Apple AirPods (3rd generation) Bluetooth  (White, True Wireless)" +
                 "50% off", 10000));
-        items.add(new Item("Discounted Milk", "Organic milk with 15% off", 30));
+        items.add(new Item("Milk", "Organic milk with 15% off", 30));
         // Add more items as needed
         return items;
     }
