@@ -55,16 +55,22 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                            finish();
+                            // After successful login, start MainActivity (with the navigation drawer)
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();  // Close LoginActivity so the user cannot go back
                         } else if (user != null) {
+                            // If email is not verified, send a verification email and log out
                             user.sendEmailVerification()
-                                    .addOnSuccessListener(aVoid -> Toast.makeText(LoginActivity.this, "Verification email sent. Please check your inbox.", Toast.LENGTH_LONG).show())
-                                    .addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "Error sending verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    .addOnSuccessListener(aVoid ->
+                                            Toast.makeText(LoginActivity.this, "Verification email sent. Please check your inbox.", Toast.LENGTH_LONG).show())
+                                    .addOnFailureListener(e ->
+                                            Toast.makeText(LoginActivity.this, "Error sending verification email: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                             mAuth.signOut();
                             Toast.makeText(LoginActivity.this, "Please verify your email to log in.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        // Handle login failure
                         String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error";
                         Toast.makeText(LoginActivity.this, "Login failed: " + errorMessage, Toast.LENGTH_LONG).show();
                     }

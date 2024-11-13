@@ -21,13 +21,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <!-- Button to navigate to LoginActivity -->
-        <Button
-            android:id="@+id/btnGoToLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go to Login"
-            android:layout_centerInParent="true"
-            tools:ignore="HardcodedText" />
 
         <!-- Bottom Navigation View positioned at the bottom -->
         <com.google.android.material.bottomnavigation.BottomNavigationView

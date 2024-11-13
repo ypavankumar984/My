@@ -4,6 +4,8 @@
 
     <!-- Internet permission for Firebase Authentication -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,21 +18,25 @@
         android:theme="@style/Theme.MY"
         tools:targetApi="31">
 
-        <!-- Main Activity (Launcher Activity) -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_api_key" />
+
+        <!-- Login Activity (Launcher Activity) -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MY">
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Login Activity -->
+        <!-- Main Activity -->
         <activity
-            android:name=".LoginActivity"
-            android:exported="true" />
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MY" />
 
         <!-- Home Activity -->
         <activity
