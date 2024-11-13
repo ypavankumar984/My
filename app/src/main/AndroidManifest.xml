@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Internet permission for Firebase Authentication -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,13 +30,27 @@
         <!-- Login Activity -->
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <!-- Home Activity -->
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="true" />
+
+        <!-- Order Transactions Activity -->
+        <activity
+            android:name=".OrderTransactionsActivity"
+            android:exported="true" />
+
+        <!-- Rewards Activity -->
+        <activity
+            android:name=".RewardsActivity"
+            android:exported="true" />
+
+        <!-- Settings Activity -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true" />
 
     </application>
 </manifest>

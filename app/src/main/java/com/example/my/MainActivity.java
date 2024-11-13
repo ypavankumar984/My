@@ -2,42 +2,71 @@ package com.example.my;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.firebase.analytics.FirebaseAnalytics; // Import Firebase Analytics
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button btnGoToLogin;
-    private FirebaseAnalytics mFirebaseAnalytics;  // Firebase Analytics instance
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize Firebase Analytics
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        // Set up Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        // Initialize the button
-        btnGoToLogin = findViewById(R.id.btnGoToLogin);
+        // Set up DrawerLayout and ActionBarDrawerToggle
+        drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-        // Log an event when the MainActivity is created (User engagement event)
-        mFirebaseAnalytics.logEvent("main_activity_opened", null);
+        // Set up NavigationView and its listener
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        // Set an OnClickListener on the button to navigate to LoginActivity
-        btnGoToLogin.setOnClickListener(new View.OnClickListener() {
+        // Handle back button press with OnBackPressedDispatcher
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
-            public void onClick(View v) {
-                // Log an event when the login button is clicked (for Firebase Analytics)
-                mFirebaseAnalytics.logEvent("login_button_clicked", null);
-
-                // Navigate to LoginActivity
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+            public void handleOnBackPressed() {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    finish(); // Close the activity if the drawer is not open
+                }
             }
         });
+    }
+
+    // Handle navigation item clicks
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.nav_order_transactions) {
+            startActivity(new Intent(this, OrderTransactionsActivity.class));
+        } else if (itemId == R.id.nav_rewards) {
+            startActivity(new Intent(this, RewardsActivity.class));
+        } else if (itemId == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else if (itemId == R.id.nav_sign_out) {
+            finish(); // or add sign-out logic here
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

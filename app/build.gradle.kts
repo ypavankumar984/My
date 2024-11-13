@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services") // Add this line to apply the Google services plugin
+    id("com.google.gms.google-services") // Apply Google services plugin for Firebase
 }
 
 android {
@@ -38,27 +38,28 @@ android {
 }
 
 dependencies {
-    // Existing dependencies
+    // AndroidX dependencies
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
+    // Firebase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1")) // Firebase BoM (Bill of Materials)
+    implementation("com.google.firebase:firebase-analytics") // Firebase Analytics
+    implementation("com.google.firebase:firebase-auth") // Firebase Authentication
+    implementation("com.google.firebase:firebase-firestore") // Firebase Firestore
+
+    // RecyclerView for lists
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    // Firebase BoM (Bill of Materials) to manage Firebase dependencies automatically
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-
-    // Firebase Analytics (replace with the specific Firebase SDKs you need)
-    implementation("com.google.firebase:firebase-analytics")
-
-    // Firebase Authentication
-    implementation("com.google.firebase:firebase-auth")
-
-    implementation("com.google.firebase:firebase-firestore")
-
-    // Firebase Firestore (optional, depending on your needs)
-    // implementation("com.google.firebase:firebase-firestore")
 }
+
+// Apply the Google services plugin (necessary for Firebase)
+apply(plugin = "com.google.gms.google-services")
