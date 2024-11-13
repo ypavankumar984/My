@@ -55,7 +55,10 @@
 
         <string name="navigation_drawer_open">Open Navigation Drawer</string>
         <string name="navigation_drawer_close">Close Navigation Drawer</string>
-
+    <string name="OneforAll">My Application</string>
+    <string name="rewards_activity">Rewards Activity</string>
+    <string name="order_transactions_activity">Order Transactions Activity</string>
+    <string name="settings_activity">Settings Activity</string>
 
 
 </resources>
