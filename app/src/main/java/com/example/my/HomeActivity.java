@@ -3,13 +3,19 @@ package com.example.my;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/** @noinspection ALL*/
 public class HomeActivity extends AppCompatActivity {
 
     private ItemAdapter itemAdapter;
@@ -47,6 +53,28 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // Set up BottomNavigationView
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_home) {
+                // Handle home action
+                Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (itemId == R.id.nav_bookmarks) {
+                // Handle bookmarks action
+                Toast.makeText(this, "Bookmarks selected", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (itemId == R.id.nav_helpbot) {
+                // Handle helpbot action
+                Toast.makeText(this, "HelpBot selected", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
+
     }
 
     // Method to filter items based on search query
@@ -70,8 +98,7 @@ public class HomeActivity extends AppCompatActivity {
     private List<Item> getDiscountedItems() {
         List<Item> items = new ArrayList<>();
         // Add items with discounts to the list (dummy data for illustration)
-        items.add(new Item("Apple airpods", "Apple AirPods (3rd generation) Bluetooth  (White, True Wireless)" +
-                "50% off", 10000));
+        items.add(new Item("Apple airpods", "Apple AirPods (3rd generation) Bluetooth (White, True Wireless) 50% off", 10000));
         items.add(new Item("Milk", "Organic milk with 15% off", 30));
         // Add more items as needed
         return items;
